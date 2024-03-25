@@ -36,6 +36,27 @@ index 292c31697248..a68f673560d0 100644
  
  	u64				nr_migrations;
  
+diff --git a/init/Kconfig b/init/Kconfig
+index bfde8189c2be..5d2a534b32c3 100644
+--- a/init/Kconfig
++++ b/init/Kconfig
+@@ -997,7 +997,7 @@ if CGROUP_SCHED
+ config FAIR_GROUP_SCHED
+ 	bool "Group scheduling for SCHED_OTHER"
+ 	depends on CGROUP_SCHED
+-	default CGROUP_SCHED
++	default n
+ 
+ config CFS_BANDWIDTH
+ 	bool "CPU bandwidth provisioning for FAIR_GROUP_SCHED"
+@@ -1272,6 +1272,7 @@ config SCHED_AUTOGROUP
+ 	select CGROUPS
+ 	select CGROUP_SCHED
+ 	select FAIR_GROUP_SCHED
++	default n
+ 	help
+ 	  This option optimizes the scheduler for common desktop workloads by
+ 	  automatically creating and populating task groups.  This separation
 diff --git a/kernel/Kconfig.hz b/kernel/Kconfig.hz
 index 38ef6d06888e..fc28076054aa 100644
 --- a/kernel/Kconfig.hz
