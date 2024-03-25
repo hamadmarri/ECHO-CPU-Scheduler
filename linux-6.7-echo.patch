@@ -93,10 +93,10 @@ index 976092b7bd45..f550be3a2e24 100644
  obj-y += build_utility.o
 diff --git a/kernel/sched/balancer.h b/kernel/sched/balancer.h
 new file mode 100644
-index 000000000000..e3ad04672af3
+index 000000000000..68965fc82f0a
 --- /dev/null
 +++ b/kernel/sched/balancer.h
-@@ -0,0 +1,868 @@
+@@ -0,0 +1,882 @@
 +#ifdef CONFIG_SMP
 +static int
 +balance_fair(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
@@ -409,6 +409,20 @@ index 000000000000..e3ad04672af3
 +}
 +
 +#ifdef CONFIG_NUMA_BALANCING
++/* Runqueue only has SCHED_IDLE tasks enqueued */
++static int sched_idle_rq(struct rq *rq)
++{
++	return unlikely(rq->nr_running == rq->cfs.idle_h_nr_running &&
++			rq->nr_running);
++}
++
++#ifdef CONFIG_SMP
++static int sched_idle_cpu(int cpu)
++{
++	return sched_idle_rq(cpu_rq(cpu));
++}
++#endif
++
 +/*
 + * Returns 1, if task migration degrades locality
 + * Returns 0, if task migration improves locality i.e migration preferred.
