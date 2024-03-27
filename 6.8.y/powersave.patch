@@ -441,10 +441,10 @@ index 7760327e5194..f1c67710e8cd 100644
  struct lb_env {
  	struct rq		*src_rq;
 diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index ff6e2d0a1107..6a5ec14b679d 100644
+index 49df55bb0ba7..6e9deddc59d6 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
-@@ -4719,6 +4719,15 @@ static struct ctl_table sched_core_sysctls[] = {
+@@ -4701,6 +4701,15 @@ static struct ctl_table sched_core_sysctls[] = {
  		.mode		= 0644,
  		.proc_handler	= proc_dointvec,
  	},
@@ -460,22 +460,8 @@ index ff6e2d0a1107..6a5ec14b679d 100644
  #endif
  #ifdef CONFIG_SCHEDSTATS
  	{
-diff --git a/kernel/sched/idle.c b/kernel/sched/idle.c
-index dbfc307103e5..390debc21e4f 100644
---- a/kernel/sched/idle.c
-+++ b/kernel/sched/idle.c
-@@ -239,6 +239,9 @@ static void do_idle(void)
- 	int cpu = smp_processor_id();
- #ifdef CONFIG_ECHO_SCHED
- 	int pm_disabled = per_cpu(nr_lat_sensitive, cpu);
-+
-+	if (IS_PWR_SAVE_ENABLED)
-+		pm_disabled = 0;
- #endif
- 	/*
- 	 * Check if we need to update blocked load
 diff --git a/kernel/sched/sched.h b/kernel/sched/sched.h
-index 56b5c0114613..a53d2240accb 100644
+index e27be055ca86..071d09f66fa0 100644
 --- a/kernel/sched/sched.h
 +++ b/kernel/sched/sched.h
 @@ -88,6 +88,10 @@
