@@ -1933,7 +1933,7 @@ index 000000000000..7760327e5194
 +
 +}
 diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index 9116bcc90346..49df55bb0ba7 100644
+index 9116bcc90346..f8f5ad0d2f90 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
 @@ -4525,6 +4525,12 @@ static void __sched_fork(unsigned long clone_flags, struct task_struct *p)
@@ -1970,7 +1970,7 @@ index 9116bcc90346..49df55bb0ba7 100644
  	wait_bit_init();
  
 +#ifdef CONFIG_ECHO_SCHED
-+	printk(KERN_INFO "ECHO CPU scheduler v6.7 by Hamad Al Marri.");
++	printk(KERN_INFO "ECHO CPU scheduler v6.8 by Hamad Al Marri.");
 +#endif
 +
  #ifdef CONFIG_FAIR_GROUP_SCHED
