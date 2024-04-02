@@ -15,7 +15,9 @@ This scheduler includes the following features: -
 balancer is enabled by default.
 
 ## Comparison with other schedulers
-TBA
+
+https://github.com/hamadmarri/benchmarks
+
 
 
 ## Policy
