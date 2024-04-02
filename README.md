@@ -6,7 +6,7 @@ It is a CPU processes scheduler patch for Linux kernel.
 
 This scheduler includes the following features: -
 
-- Highly multitasking handling with max 105us quota.
+- Highly multitasking handling with max 500ns quota.
 - All tasks in a CPU have a shared quota = 500ns in which every task runs (500ns / # of tasks)
 - Minimum slice for a running a task is 7us unless waked up task that must run before the current task then it preempts it.
 - Calculate the estimation of tasks - SRTF (Shortest Remaining Task Next). This uses moving average to calculate virtual runtime.
