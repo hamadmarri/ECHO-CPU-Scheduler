@@ -39,6 +39,9 @@ ex. `sysctl kernel.sched_bs_shared_quota=4800000` larger values saves CPU caches
 	- CONFIG_SCHED_AUTOGROUP
 	- CONFIG_SCHED_CORE
 
-TBC
+
+## Telegram Group
+
+https://t.me/tt_sched
 
 Hamad
