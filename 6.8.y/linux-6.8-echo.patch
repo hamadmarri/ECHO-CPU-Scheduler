@@ -43,21 +43,6 @@ index ffe8f618ab86..947d94be2437 100644
  	u64				nr_migrations;
  
  #ifdef CONFIG_FAIR_GROUP_SCHED
-diff --git a/include/linux/sched/rt.h b/include/linux/sched/rt.h
-index b2b9e6eb9683..13f36253762a 100644
---- a/include/linux/sched/rt.h
-+++ b/include/linux/sched/rt.h
-@@ -58,6 +58,10 @@ extern void normalize_rt_tasks(void);
-  * default timeslice is 100 msecs (used only for SCHED_RR tasks).
-  * Timeslices get refilled after they expire.
-  */
-+#ifdef CONFIG_ECHO_SCHED
-+#define RR_TIMESLICE		(1)
-+#else
- #define RR_TIMESLICE		(100 * HZ / 1000)
-+#endif
- 
- #endif /* _LINUX_SCHED_RT_H */
 diff --git a/init/Kconfig b/init/Kconfig
 index bee58f7468c3..933ec5c9a941 100644
 --- a/init/Kconfig
@@ -1055,7 +1040,7 @@ index 000000000000..852faad1fc1d
 +#endif /* CONFIG_SMP */
 diff --git a/kernel/sched/bs.c b/kernel/sched/bs.c
 new file mode 100644
-index 000000000000..7ef119897cea
+index 000000000000..63781372e836
 --- /dev/null
 +++ b/kernel/sched/bs.c
 @@ -0,0 +1,888 @@
@@ -1075,8 +1060,8 @@ index 000000000000..7ef119897cea
 +#include "sched.h"
 +#include "pelt.h"
 +
-+unsigned int sysctl_sched_base_slice	= 50ULL;
-+unsigned int bs_shared_quota		= 500ULL; // 500ns
++unsigned int sysctl_sched_base_slice	= 6000ULL;
++unsigned int bs_shared_quota		= 35000ULL; // 35us
 +u32 alpha				= 500U;
 +
 +struct lb_env {
